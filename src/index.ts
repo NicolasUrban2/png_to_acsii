@@ -1,5 +1,4 @@
-import * as fs from 'fs';
-import { compressPng, readPng } from './pngOperations';
+import { readPng } from './pngOperations';
 import { pngToAscii } from './pngToAscii';
 
 const args = process.argv.slice(2);
@@ -10,8 +9,9 @@ if (args.length === 0) {
 }
 
 const pngFileName = args[0];
+const ratio = parseInt(args[1], 10) || 50;
 
 const png = readPng(pngFileName);
 
-const ascii = pngToAscii(png, 50);
+const ascii = pngToAscii(png, ratio);
 console.log(ascii);

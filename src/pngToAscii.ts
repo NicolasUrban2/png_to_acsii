@@ -7,7 +7,7 @@ export function pngToAscii(png: PNG, width: number): string {
 
     let ascii = '';
 
-    for (let y = 0; y < compressedPng.height; y++) {
+    for (let y = 0; y < compressedPng.height; y+=2) {
         for (let x = 0; x < compressedPng.width; x++) {
             const idx = (y * compressedPng.width + x) << 2;
             ascii += getAsciiCharForPixel(compressedPng, idx);
