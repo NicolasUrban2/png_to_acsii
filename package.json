@@ -13,9 +13,11 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^22.15.21",
-    "typescript": "^5.8.3"
+    "@types/pngjs": "^6.0.5",
+    "typescript": "^5.8.3",
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
-    "ts-node": "^10.9.2"
+    "pngjs": "^7.0.0"
   }
 }
