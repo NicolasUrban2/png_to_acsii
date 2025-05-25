@@ -1,5 +1,6 @@
 import * as fs from 'fs';
-import { compressPng, readPng } from './readPng';
+import { compressPng, readPng } from './pngOperations';
+import { pngToAscii } from './pngToAscii';
 
 const args = process.argv.slice(2);
 
@@ -10,23 +11,7 @@ if (args.length === 0) {
 
 const pngFileName = args[0];
 
-const asciiWidth = 50;
 const png = readPng(pngFileName);
 
-const ratio = Math.ceil(png.width / asciiWidth);
-
-const compressedPng = compressPng(readPng(pngFileName), ratio);
-const outputFileName = pngFileName.replace(/\.png$/, '-compressed.png');
-const stream = compressedPng.pack();
-
-const chunks: Buffer[] = [];
-stream.on('data', (chunk) => chunks.push(chunk));
-stream.on('end', () => {
-    const data = Buffer.concat(chunks);
-    console.log(`Compressed PNG data length: ${data.length} bytes`);
-    fs.writeFileSync(outputFileName, data);
-    console.log(`Compressed PNG saved as "${outputFileName}"`);
-});
-stream.on('error', (err) => {
-    console.error('Error while compressing PNG:', err);
-});
+const ascii = pngToAscii(png, 50);
+console.log(ascii);
